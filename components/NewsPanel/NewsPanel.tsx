@@ -61,13 +61,22 @@ export default function NewsPanel() {
       {/* Panel */}
       <div
         className={`
-          fixed top-0 right-0 h-full w-[360px] z-20
-          bg-black/90 backdrop-blur-md border-l border-white/10
+          fixed z-20
+          bg-black/90 backdrop-blur-md border-white/10
           flex flex-col shadow-2xl
           transition-transform duration-300 ease-out
-          ${isPanelOpen ? 'translate-x-0' : 'translate-x-full'}
+          bottom-0 left-0 right-0 h-[78vh] rounded-t-2xl border-t
+          sm:bottom-auto sm:left-auto sm:top-0 sm:right-0 sm:h-full sm:w-[360px] sm:rounded-none sm:border-t-0 sm:border-l
+          ${isPanelOpen
+            ? 'translate-y-0 sm:translate-x-0 sm:translate-y-0'
+            : 'translate-y-full sm:translate-x-full sm:translate-y-0'}
         `}
       >
+        {/* Drag handle (mobile only) */}
+        <div className="sm:hidden flex justify-center pt-2.5 pb-1 shrink-0">
+          <div className="w-10 h-1 rounded-full bg-white/20" />
+        </div>
+
         {/* Close button */}
         <button
           onClick={() => {
@@ -82,14 +91,14 @@ export default function NewsPanel() {
 
         {/* Header: either country or source */}
         {selectedCountry && !selectedSource && (
-          <div className="p-3 border-b border-white/10">
+          <div className="p-3 pr-10 border-b border-white/10">
             <button
               onClick={() => setSelectedCountry(null)}
               className="text-sm text-gray-400 hover:text-white mb-2"
             >
               ← Back to globe
             </button>
-            <h3 className="text-lg font-semibold">{selectedCountry}</h3>
+            <h3 className="text-lg font-semibold truncate">{selectedCountry}</h3>
             <p className="text-xs text-gray-400">Sources for this country</p>
           </div>
         )}
@@ -121,13 +130,13 @@ export default function NewsPanel() {
                       onClick={() => setSelectedSource(s)}
                       className="w-full text-left p-2 rounded bg-white/5 hover:bg-white/10"
                     >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-medium">{s.name}</div>
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="min-w-0">
+                          <div className="font-medium truncate">{s.name}</div>
                           <div className="text-xs text-gray-400">{s.language} · {s.category}</div>
                         </div>
-                        <div className="text-xs text-cyan-400">
-                          {matchCount != null ? `${matchCount} matching →` : 'View articles →'}
+                        <div className="text-xs text-cyan-400 shrink-0">
+                          {matchCount != null ? `${matchCount} matching →` : 'View →'}
                         </div>
                       </div>
                     </button>

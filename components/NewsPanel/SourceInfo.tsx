@@ -16,12 +16,13 @@ export default function SourceInfo({ source, articleCount }: Props) {
 
   return (
     <div className="p-4 border-b border-white/10">
-      <div className="flex items-center gap-3">
+      {/* pr-8 leaves room for the absolute close button (top-3 right-3) */}
+      <div className="flex items-center gap-3 pr-8">
         {flagUrl && (
           <img
             src={flagUrl}
             alt={source.country}
-            className="h-5 rounded-sm opacity-90"
+            className="h-5 rounded-sm opacity-90 shrink-0"
             onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')}
           />
         )}

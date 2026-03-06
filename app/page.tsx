@@ -33,8 +33,9 @@ export default function Home() {
 
   return (
     <main className="relative w-screen h-screen overflow-hidden bg-black">
-      {/* Full-screen globe */}
-      <div className="absolute inset-0">
+      {/* Full-screen globe — z-0 + isolate creates a stacking context so globe.gl's
+          internal HTML elements (flag markers) can't bleed above the panel (z-20) */}
+      <div className="absolute inset-0 z-0 isolate">
         {!isLoading && filteredSources.length > 0 && (
           <GlobeViewer
             sources={filteredSources}
@@ -44,10 +45,10 @@ export default function Home() {
       </div>
 
       {/* Top UI overlay */}
-      <div className="absolute top-0 left-0 right-0 z-50 flex flex-col items-center pt-6 px-4 pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 z-50 flex flex-col items-center pt-4 sm:pt-6 px-4 pointer-events-none">
         {/* Title */}
-        <div className="mb-4 text-center pointer-events-none">
-          <h1 className="text-2xl font-bold text-white tracking-tight">
+        <div className="mb-3 sm:mb-4 text-center pointer-events-none">
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             News Globe
           </h1>
           <p className="text-xs text-gray-400 mt-0.5">
@@ -63,8 +64,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Bottom legend */}
-      <div className="absolute bottom-4 left-4 z-10 flex flex-col gap-1.5 pointer-events-none">
+      {/* Bottom legend — hidden on mobile to reduce clutter */}
+      <div className="hidden sm:flex absolute bottom-4 left-4 z-10 flex-col gap-1.5 pointer-events-none">
         <div className="flex items-center gap-2 text-xs text-gray-400">
           <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block" />
           News source
@@ -79,15 +80,21 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Controls hint */}
-      <div className="absolute bottom-4 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
+      {/* Controls hint — desktop */}
+      <div className="hidden sm:block absolute bottom-4 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
         <p>Drag to rotate · Scroll to zoom</p>
         <p>Click a dot to read articles</p>
       </div>
 
+      {/* Controls hint — mobile */}
+      <div className="sm:hidden absolute bottom-4 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
+        <p>Drag to rotate · Pinch to zoom</p>
+        <p>Tap a dot to read articles</p>
+      </div>
+
       {/* Resume rotation button */}
       <button
-        className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs text-gray-300 backdrop-blur-sm transition-all"
+        className="absolute bottom-14 sm:bottom-16 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs text-gray-300 backdrop-blur-sm transition-all"
         onClick={() => setGlobeRotating(true)}
       >
         ↺ Resume rotation

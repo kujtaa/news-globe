@@ -257,6 +257,7 @@ export default function GlobeViewer({ sources, highlightedIds = [] }: Props) {
       ref={containerRef}
       className="w-full h-full"
       onMouseDown={() => setGlobeRotating(false)}
+      onTouchStart={() => setGlobeRotating(false)}
     />
   )
 }

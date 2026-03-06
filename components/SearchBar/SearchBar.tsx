@@ -148,7 +148,7 @@ export default function SearchBar() {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Search news topics, e.g. Trump, climate, AI..."
           className="
-            w-full pl-9 pr-10 py-2.5 rounded-full
+            w-full pl-9 pr-10 py-3 sm:py-2.5 rounded-full
             bg-black/60 backdrop-blur-md
             border border-white/20 hover:border-white/40 focus:border-cyan-400/70
             text-white text-sm placeholder:text-gray-500
@@ -202,7 +202,7 @@ export default function SearchBar() {
                 </span>
               </div>
               {/* Country list */}
-              <div className="max-h-60 overflow-y-auto divide-y divide-white/5">
+              <div className="max-h-44 sm:max-h-60 overflow-y-auto divide-y divide-white/5">
                 {countryResults.map(({ code, name, count }) => (
                   <button
                     key={code}
