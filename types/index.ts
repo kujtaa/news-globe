@@ -78,7 +78,7 @@ export interface GlobeStore {
   highlightedSourceIds: string[]
   isPanelOpen: boolean
   globeRotating: boolean
-  selectedCountry?: string | null
+  selectedCountry: string | null
   flyToCountry: string | null
 
   setSelectedSource: (source: NewsSource | null) => void
@@ -86,7 +86,7 @@ export interface GlobeStore {
   setSearchQuery: (query: string) => void
   setActiveCategory: (category: SourceCategory | 'all') => void
   setHighlightedSourceIds: (ids: string[]) => void
-  setSelectedCountry?: (country: string | null) => void
+  setSelectedCountry: (country: string | null) => void
   setFlyToCountry: (country: string | null) => void
   setIsPanelOpen: (open: boolean) => void
   setGlobeRotating: (rotating: boolean) => void
