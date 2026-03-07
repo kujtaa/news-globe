@@ -6,6 +6,7 @@ import { useSources } from '@/hooks/useNews'
 import { useGlobeStore } from '@/store/globeStore'
 import SearchBar from '@/components/SearchBar/SearchBar'
 import NewsPanel from '@/components/NewsPanel/NewsPanel'
+import SourcesFooter from '@/components/SourcesFooter/SourcesFooter'
 
 // Globe.gl requires WebGL — must be loaded client-side only
 const GlobeViewer = dynamic(() => import('@/components/Globe/GlobeViewer'), {
@@ -81,16 +82,19 @@ export default function Home() {
       </div>
 
       {/* Controls hint — desktop */}
-      <div className="hidden sm:block absolute bottom-4 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
+      <div className="hidden sm:block absolute bottom-16 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
         <p>Drag to rotate · Scroll to zoom</p>
         <p>Click a dot to read articles</p>
       </div>
 
       {/* Controls hint — mobile */}
-      <div className="sm:hidden absolute bottom-4 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
+      <div className="sm:hidden absolute bottom-16 right-4 z-10 text-xs text-gray-500 text-right pointer-events-none">
         <p>Drag to rotate · Pinch to zoom</p>
         <p>Tap a dot to read articles</p>
       </div>
+
+      {/* Sources footer — bottom-right */}
+      <SourcesFooter />
 
       {/* Resume rotation button */}
       <button
